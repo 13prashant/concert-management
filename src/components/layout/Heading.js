@@ -49,7 +49,10 @@ const Heading = () => {
   });
 
   return (
-    <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
+    <Breadcrumbs
+      separator={<NavigateNextIcon fontSize="small" />}
+      sx={{ mb: 4 }}
+    >
       {breadcrumbs}
     </Breadcrumbs>
   );
