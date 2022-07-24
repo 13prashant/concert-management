@@ -1,5 +1,5 @@
 const CreateConcert = () => {
-  return <div>CreateConcert</div>;
+  return <div>CreateConcert.</div>;
 };
 
 export default CreateConcert;
