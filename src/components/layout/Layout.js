@@ -7,17 +7,24 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
+import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 // Material icons
 import MenuIcon from '@mui/icons-material/Menu';
 import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
+import SearchIcon from '@mui/icons-material/Search';
+
+// Components
+import Heading from './Heading';
 
 const drawerWidth = 240;
 
@@ -85,6 +92,23 @@ function Layout({ children }) {
           <Typography variant="h6" noWrap component="div">
             Concert Management
           </Typography>
+          <Paper
+            variant="outlined"
+            component="form"
+            sx={{
+              p: '0 4px',
+              display: 'flex',
+              alignItems: 'center',
+              width: 200,
+              opacity: '0.5',
+              marginLeft: 'auto',
+            }}
+          >
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+            <InputBase placeholder={`Search...`} />
+          </Paper>
         </Toolbar>
       </AppBar>
 
@@ -137,7 +161,11 @@ function Layout({ children }) {
         }}
       >
         <Toolbar />
-        {children}
+        {/* Heading */}
+        <Container>
+          <Heading />
+          {children}
+        </Container>
       </Box>
     </Box>
   );
