@@ -71,8 +71,8 @@ const ConcertCard = ({ concert }) => {
         }}
         style={{
           position: 'absolute',
-          right: 0,
-          bottom: 0,
+          right: 8,
+          bottom: 8,
         }}
       >
         <IconButton

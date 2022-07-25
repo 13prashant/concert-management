@@ -8,11 +8,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // Utils
 import { createBreadCrumbTitle } from '../../utils/utils';
 
-const Heading = () => {
+const Heading = ({ paths }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const paths = location.pathname.split('/').splice(1);
 
   const breadcrumbs = paths.map((path, index) => {
     let result = [];

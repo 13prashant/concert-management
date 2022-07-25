@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // Material components
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -42,6 +42,11 @@ const menuItems = [
 ];
 
 function Layout({ children }) {
+  const location = useLocation();
+  const paths = location.pathname.split('/').splice(1);
+
+  const isPathWelcome = paths[0] === '';
+
   const navigate = useNavigate();
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -165,7 +170,7 @@ function Layout({ children }) {
         <Toolbar />
         {/* Heading */}
         <Container>
-          <Heading />
+          {!isPathWelcome && <Heading paths={paths} />}
           {children}
         </Container>
       </Box>
