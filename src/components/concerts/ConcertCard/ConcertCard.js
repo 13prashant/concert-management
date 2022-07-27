@@ -24,11 +24,15 @@ const ITEM_HEIGHT = 48;
 const ConcertCard = ({ concert }) => {
   const navigate = useNavigate();
 
+  const { title, venue, time, coverImage, artists } = concert;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -36,25 +40,25 @@ const ConcertCard = ({ concert }) => {
   return (
     <Card
       sx={{ maxWidth: 345, position: 'relative' }}
-      onClick={() => navigate(`${createConcertSlug(concert.title)}`)}
+      onClick={() => navigate(`${createConcertSlug(title)}`)}
     >
       <CardActionArea>
-        <CardMedia component="img" height="140" image={concert.image} />
+        <CardMedia component="img" height="140" image={coverImage} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {concert.title}
+            {title}
           </Typography>
           <Typography variant="body1" color="text.primary">
-            {concert.venue}
+            {venue}
           </Typography>
           <Typography gutterBottom variant="body2" color="text.secondary">
-            {concert.time}
+            {new Date(time.toDate()).toDateString()}
           </Typography>
         </CardContent>
 
         <CardActions>
-          <AvatarGroup total={concert.artists.length}>
-            {concert.artists.map((artist) => (
+          <AvatarGroup total={artists.length}>
+            {artists.map((artist) => (
               <Avatar key={artist} sx={{ bgcolor: red[500] }}>
                 {`${Array.from(artist.split(' ')[0])[0]}${
                   Array.from(artist.split(' ')[1])[0]
