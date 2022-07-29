@@ -52,7 +52,7 @@ const ConcertCard = ({ concert }) => {
             {venue}
           </Typography>
           <Typography gutterBottom variant="body2" color="text.secondary">
-            {new Date(time.toDate()).toDateString()}
+            {time.toDate().toLocaleString()}
           </Typography>
         </CardContent>
 

@@ -4,9 +4,15 @@ import { useCollection } from '../../hooks/useCollection';
 import Grid from '@mui/material/Grid';
 // Components
 import ConcertCard from '../../components/concerts/ConcertCard/ConcertCard';
+// Constants
+import { COLLECTION_CONCERTS } from '../../utils/constants';
 
 const Concerts = () => {
-  const { documents: concerts, isPending, error } = useCollection('concerts');
+  const {
+    documents: concerts,
+    isPending,
+    error,
+  } = useCollection(COLLECTION_CONCERTS);
 
   if (isPending) {
     return <h3>Loading...</h3>;
