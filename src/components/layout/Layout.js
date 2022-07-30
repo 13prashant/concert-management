@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 // Material components
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -169,11 +169,8 @@ function Layout({ children }) {
         }}
       >
         <Toolbar />
-        {/* Heading */}
-        <Container>
-          {!isPathWelcome && <Heading paths={paths} />}
-          {children}
-        </Container>
+        {!isPathWelcome && <Heading paths={paths} />}
+        <Outlet />
       </Box>
     </Box>
   );
