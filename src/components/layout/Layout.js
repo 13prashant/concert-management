@@ -22,9 +22,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-
 // Components
 import Heading from './Heading';
+// Constants
+import { APP_NAME } from '../../utils/constants';
 
 const drawerWidth = 240;
 
@@ -95,7 +96,7 @@ function Layout({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Concert Management
+            {APP_NAME}
           </Typography>
           <Paper
             variant="outlined"
