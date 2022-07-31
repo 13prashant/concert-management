@@ -29,6 +29,7 @@ import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 // Components
 import Heading from './Heading';
+import Error from '../commons/Error';
 // Constants
 import { APP_NAME } from '../../utils/constants';
 
@@ -200,6 +201,7 @@ function Layout() {
       >
         <Toolbar />
         {!isPathWelcome && <Heading paths={paths} />}
+        {error && <Error errorMessage={error} mb />}
         <Outlet />
       </Box>
     </Box>
