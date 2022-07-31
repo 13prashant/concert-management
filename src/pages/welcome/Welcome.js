@@ -13,6 +13,8 @@ import Link from '@mui/material/Link';
 // Material Icons
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
+// Components
+import Error from '../../components/commons/Error';
 // Constants
 import { APP_NAME } from '../../utils/constants';
 
@@ -77,6 +79,7 @@ const Welcome = () => {
             FIND SONGS' LYRICS
           </Link>
         </Typography>
+        {error && <Error errorMessage={error} mt />}
       </Paper>
     </Box>
   );
