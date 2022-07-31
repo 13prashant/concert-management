@@ -25,7 +25,7 @@ const Welcome = () => {
 
   useEffect(() => {
     user && navigate('/concerts');
-  }, []);
+  }, [user, navigate]);
 
   return (
     <Box

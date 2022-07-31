@@ -39,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
       if (user) {
         dispatch({ type: IS_AUTH_READY, payload: user });
       } else {
-        console.log('user signed out');
+        dispatch({ type: IS_AUTH_READY, payload: null });
       }
     });
   }, []);
