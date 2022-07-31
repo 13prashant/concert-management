@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Contexts
+import { useAuthContext } from './hooks/useAuthContext';
 // Components
 import Layout from './components/layout/Layout';
 // Pages
@@ -7,24 +9,32 @@ import Lyrics from './pages/lyrics/Lyrics';
 import Concerts from './pages/concerts/Concerts';
 import Concert from './pages/concert/Concert';
 import CreateConcert from './pages/createConcert/CreateConcert';
-import { useAuthContext } from './hooks/useAuthContext';
+import PrivateRoutes from './components/PrivateRoutes';
 
 function App() {
-  const { user } = useAuthContext();
-  console.log(user);
+  const { isAuthReady } = useAuthContext();
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route element={<Layout />}>
-          <Route path="/lyrics" element={<Lyrics />} />
-          <Route path="/concerts" element={<Concerts />} />
-          <Route path="/concerts/:concert" element={<Concert />} />
-          <Route path="/concerts/create-concert" element={<CreateConcert />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    isAuthReady && (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+
+          <Route element={<Layout />}>
+            <Route path="/lyrics" element={<Lyrics />} />
+
+            <Route element={<PrivateRoutes />}>
+              <Route path="/concerts" element={<Concerts />} />
+              <Route path="/concerts/:concert" element={<Concert />} />
+              <Route
+                path="/concerts/create-concert"
+                element={<CreateConcert />}
+              />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    )
   );
 }
 

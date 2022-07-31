@@ -9,19 +9,13 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext();
 
   const login = async () => {
-    console.log('clicked');
     try {
       const result = await signInWithPopup(auth, googleProvider);
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
       // Signed-in user info
-      const { displayName, email, photoURL, uid } = result.user;
-      const user = {
-        displayName,
-        email,
-        photoURL,
-        uid,
-      };
+      const user = result.user;
+
       dispatch({ type: LOGIN, payload: user });
     } catch (error) {
       // const errorCode = error.code;

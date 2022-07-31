@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+// Contexts
+import { useAuthContext } from '../../hooks/useAuthContext';
 // Hooks
 import { useLogin } from '../../hooks/useLogin';
 // Material components
@@ -16,7 +19,13 @@ import { APP_NAME } from '../../utils/constants';
 
 const Welcome = () => {
   const navigate = useNavigate();
+
+  const { user } = useAuthContext();
   const { login } = useLogin();
+
+  useEffect(() => {
+    user && navigate('/concerts');
+  }, []);
 
   return (
     <Box
