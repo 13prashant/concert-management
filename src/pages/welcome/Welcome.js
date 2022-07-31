@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-
 // Material Icons
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -21,7 +20,7 @@ const Welcome = () => {
   const navigate = useNavigate();
 
   const { user } = useAuthContext();
-  const { login } = useLogin();
+  const { login, isPending, error } = useLogin();
 
   useEffect(() => {
     user && navigate('/concerts');
@@ -53,6 +52,7 @@ const Welcome = () => {
           variant="outlined"
           startIcon={<GoogleIcon />}
           fullWidth
+          disabled={isPending}
           sx={{ margin: '2rem 0 1rem 0' }}
           onClick={login}
         >
@@ -63,6 +63,7 @@ const Welcome = () => {
           variant="outlined"
           startIcon={<FacebookIcon />}
           fullWidth
+          disabled={isPending}
           sx={{ margin: '0 0 2rem 0' }}
         >
           Sign In with Facebook
