@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+// Contexts
+import { useAuthContext } from '../../hooks/useAuthContext';
+// Hooks
+import { useLogout } from '../../hooks/useLogout';
 // Material components
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -17,6 +21,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
 // Material icons
 import MenuIcon from '@mui/icons-material/Menu';
 import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined';
@@ -42,13 +47,17 @@ const menuItems = [
   },
 ];
 
-function Layout({ children }) {
+function Layout() {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const paths = location.pathname.split('/').splice(1);
 
   const isPathWelcome = paths[0] === '';
 
-  const navigate = useNavigate();
+  const { user } = useAuthContext();
+
+  const { logout, isPending, error } = useLogout();
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -58,7 +67,28 @@ function Layout({ children }) {
 
   const drawer = (
     <div>
-      <Toolbar />
+      {/* <Toolbar /> */}
+      {user && (
+        <>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-around"
+            p={3}
+          >
+            <Avatar alt={user.displayName} src={user.photoURL} />
+            <Typography variant="h6" noWrap component="div">
+              {user.displayName}
+            </Typography>
+          </Box>
+          <Box textAlign="center">
+            <Button onClick={logout} disabled={isPending}>
+              Logout
+            </Button>
+          </Box>
+        </>
+      )}
+
       <Divider />
       <List>
         {menuItems.map(({ text, icon, path }) => (
