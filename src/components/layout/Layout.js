@@ -19,9 +19,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import { Button } from '@mui/material';
+import Button from '@mui/material/Button';
 // Material icons
 import MenuIcon from '@mui/icons-material/Menu';
 import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined';
@@ -29,6 +30,7 @@ import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 // Components
 import Heading from './Heading';
+import Error from '../commons/Error';
 // Constants
 import { APP_NAME } from '../../utils/constants';
 
@@ -199,8 +201,11 @@ function Layout() {
         }}
       >
         <Toolbar />
-        {!isPathWelcome && <Heading paths={paths} />}
-        <Outlet />
+        <Container>
+          {!isPathWelcome && <Heading paths={paths} />}
+          {error && <Error errorMessage={error} mb />}
+          <Outlet />
+        </Container>
       </Box>
     </Box>
   );

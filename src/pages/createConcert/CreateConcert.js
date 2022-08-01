@@ -5,15 +5,14 @@ import { Button, Typography } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../configs/firebase';
+import { useFirestore } from '../../hooks/useFirestore';
+import { COLLECTION_CONCERTS } from '../../utils/constants';
 
 const CreateConcert = () => {
   //Concert form states
   const [title, setTitle] = useState('');
   const [venue, setVenue] = useState('');
   const [time, setTime] = useState(null);
-  console.log(time);
   const [coverImage, setCoverImage] = useState('');
   const [artists, setArtists] = useState(['Nishant', 'Prashant', 'Hriday']);
   const [titleError, setTitleError] = useState(false);
@@ -21,11 +20,11 @@ const CreateConcert = () => {
   const [dateError, setDateError] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  const { document, isPending, error, addDocument } = useFirestore();
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Setting the error state for empty/unchanged inputs and removing it after 5 seconds
 
     if (title === '') {
       setTitleError(true);
@@ -57,18 +56,10 @@ const CreateConcert = () => {
 
     if (title && venue && time && coverImage) {
       // Adding document in firestore
-      try {
-        const docRef = await addDoc(collection(db, 'concerts'), {
-          artists,
-          title,
-          venue,
-          time,
-          coverImage,
-        });
-        console.log('Document written with ID: ', docRef.id);
-      } catch (e) {
-        console.error('Error adding document: ', e);
-      }
+      addDocument(
+        { title, venue, time, coverImage, artists },
+        COLLECTION_CONCERTS
+      );
 
       //Setting changed states to its intial states
       setTitle('');
@@ -155,6 +146,7 @@ const CreateConcert = () => {
           color="primary"
           variant="contained"
           size="large"
+          disabled={isPending}
           fullWidth
         >
           Submit
