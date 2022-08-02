@@ -17,7 +17,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 // Material colors
 import { red } from '@mui/material/colors';
 // Utils
-import { createConcertSlug } from '../../../utils/utils';
+import { createAvatarName, createConcertSlug } from '../../../utils/utils';
 
 const ITEM_HEIGHT = 48;
 
@@ -60,9 +60,7 @@ const ConcertCard = ({ concert }) => {
           <AvatarGroup total={artists.length}>
             {artists.map((artist) => (
               <Avatar key={artist} sx={{ bgcolor: red[500] }}>
-                {`${Array.from(artist.split(' ')[0])[0]}${
-                  Array.from(artist.split(' ')[1])[0]
-                }`}
+                {createAvatarName(artist)}
               </Avatar>
             ))}
           </AvatarGroup>
