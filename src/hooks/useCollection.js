@@ -10,6 +10,8 @@ export const useCollection = (collectionName) => {
   useEffect(() => {
     (async () => {
       try {
+        setError(null);
+
         // collection ref
         const collectionRef = collection(db, collectionName);
 
@@ -23,7 +25,6 @@ export const useCollection = (collectionName) => {
 
         setDocuments(result);
         setIsPending(false);
-        setError(null);
       } catch (error) {
         setIsPending(false);
         setError(error.message);
