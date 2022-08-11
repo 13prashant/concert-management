@@ -2,7 +2,6 @@ import { useStorage } from '../../hooks/useStorage';
 import { BUCKET_LYRICS } from '../../utils/constants';
 
 const Lyrics = () => {
-  debugger;
   const { list, isPending, error } = useStorage(BUCKET_LYRICS);
 
   if (isPending) {
@@ -14,7 +13,7 @@ const Lyrics = () => {
 
   return (
     <div>
-      {list.map((item) => (
+      {list?.map((item) => (
         <h2>{item}</h2>
       ))}
     </div>
