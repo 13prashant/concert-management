@@ -23,3 +23,9 @@ export const createAvatarName = (string) => {
     return `${strArr[0][0]}${strArr[1][0]}`;
   }
 };
+
+//Unique Id
+
+export const uniqueId = () => {
+  return Math.floor(Math.random() * 100) * Date.now();
+};
