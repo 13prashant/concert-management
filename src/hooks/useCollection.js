@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../configs/firebase';
+import { QUERY_LIMIT } from '../utils/constants';
 
-export const useCollection = (collectionName, orderQuery, queryLimit) => {
+export const useCollection = (
+  collectionName,
+  orderQuery = ['createdAt', 'desc'],
+  queryLimit = QUERY_LIMIT
+) => {
   const [documents, setDocuments] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);

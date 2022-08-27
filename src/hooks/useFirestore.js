@@ -1,6 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
-import { db } from '../configs/firebase';
+import { db, timestamp } from '../configs/firebase';
 
 export const useFirestore = () => {
   const [document, setDocument] = useState(null);
@@ -11,6 +11,7 @@ export const useFirestore = () => {
 
   const addDocument = async (document, collectionName) => {
     setIsPending(true);
+    document.createdAt = timestamp(Date.now());
     try {
       await addDoc(collection(db, collectionName), document);
 

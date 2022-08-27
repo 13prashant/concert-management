@@ -3,7 +3,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { COLLECTION_LYRICS } from '../../utils/constants';
+import { COLLECTION_LYRICS, QUERY_LIMIT } from '../../utils/constants';
 
 const Lyrics = () => {
   const {
@@ -23,7 +23,7 @@ const Lyrics = () => {
     <div>
       {lyrics.map(({ fileName, pdf, writtenBy, composedBy }) => (
         <List key={fileName}>
-          <a href={pdf} target="_blank">
+          <a href={pdf} rel="noreferrer" target="_blank">
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemText
