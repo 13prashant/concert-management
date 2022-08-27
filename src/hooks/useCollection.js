@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../configs/firebase';
 
-export const useCollection = (collectionName) => {
+export const useCollection = (collectionName, orderQuery, queryLimit) => {
   const [documents, setDocuments] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +15,13 @@ export const useCollection = (collectionName) => {
 
         const result = [];
 
-        const querySnapshot = await getDocs(collectionRef);
+        const q = query(
+          collectionRef,
+          orderBy(...orderQuery),
+          limit(queryLimit)
+        );
+
+        const querySnapshot = await getDocs(q);
 
         querySnapshot.forEach((doc) => {
           result.push({ ...doc.data(), id: doc.id });
@@ -30,7 +36,7 @@ export const useCollection = (collectionName) => {
         console.error('Error: ', error.message);
       }
     })();
-  }, [collectionName]);
+  }, [collectionName, queryLimit]);
 
   return { documents, isPending, error };
 };

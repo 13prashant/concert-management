@@ -5,4 +5,4 @@ export const APP_NAME = 'Concert Management';
 export const COLLECTION_CONCERTS = 'concerts';
 export const COLLECTION_LYRICS = 'lyrics';
 
-export const QUERY_LIMIT = 20;
+export const QUERY_LIMIT = 9;

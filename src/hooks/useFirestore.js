@@ -13,6 +13,7 @@ export const useFirestore = () => {
     setIsPending(true);
     try {
       await addDoc(collection(db, collectionName), document);
+
       setIsPending(false);
     } catch (error) {
       setError(error.message);
