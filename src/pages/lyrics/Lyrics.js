@@ -1,8 +1,16 @@
-import { useStorage } from '../../hooks/useStorage';
-import { BUCKET_LYRICS } from '../../utils/constants';
+import { useCollection } from '../../hooks/useCollection';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { COLLECTION_LYRICS } from '../../utils/constants';
 
 const Lyrics = () => {
-  const { list, isPending, error } = useStorage(BUCKET_LYRICS);
+  const {
+    documents: lyrics,
+    isPending,
+    error,
+  } = useCollection(COLLECTION_LYRICS);
 
   if (isPending) {
     return <h3>Loading...</h3>;
@@ -13,8 +21,19 @@ const Lyrics = () => {
 
   return (
     <div>
-      {list?.map((item) => (
-        <h2>{item}</h2>
+      {lyrics.map(({ fileName, pdf, writtenBy, composedBy }) => (
+        <List key={fileName}>
+          <a href={pdf} target="_blank">
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText
+                  primary={fileName}
+                  secondary={`Written By: ${writtenBy}, Composed By: ${composedBy}`}
+                />
+              </ListItemButton>
+            </ListItem>
+          </a>
+        </List>
       ))}
     </div>
   );
