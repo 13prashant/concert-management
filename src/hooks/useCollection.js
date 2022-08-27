@@ -10,6 +10,8 @@ export const useCollection = (collectionName, orderQuery, queryLimit) => {
   useEffect(() => {
     (async () => {
       try {
+        setError(null);
+
         // collection ref
         const collectionRef = collection(db, collectionName);
 
@@ -29,7 +31,6 @@ export const useCollection = (collectionName, orderQuery, queryLimit) => {
 
         setDocuments(result);
         setIsPending(false);
-        setError(null);
       } catch (error) {
         setIsPending(false);
         setError(error.message);

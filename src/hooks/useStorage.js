@@ -1,50 +1,54 @@
-import { useState } from 'react';
-import { storage } from '../configs/firebase';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
-import { uniqueId } from '../utils/utils';
+import { useEffect, useState } from 'react';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage, timestamp } from '../configs/firebase';
+import { useFirestore } from './useFirestore';
+import { COLLECTION_LYRICS } from '../utils/constants';
 
-export const useStorage = () => {
-  const [docUrl, setDocUrl] = useState('');
+export const useStorage = (bucketName, file) => {
+  const [url, setUrl] = useState(null);
+  const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
-  const [progress, setProgress] = useState('');
 
-  const downloadDocument = (metadatacontentType, storagePath, file) => {
-    const metadata = {
-      contentType: `${metadatacontentType}`,
-    };
+  const { addDocument } = useFirestore();
 
-    const storageRef = ref(storage, storagePath + uniqueId());
+  useEffect(() => {
+    (async () => {
+      setError(null);
 
-    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(progress);
-      },
+      const storageRef = ref(storage, bucketName);
 
-      (error) => {
-        setError(error.message);
-        console.log(error);
-      },
-      async () => {
-        try {
+      const uploadTask = uploadBytes(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(progress);
+        },
+        (error) => {
+          setError(error.message);
+          console.log('Error: ', error);
+        },
+        async () => {
+          const fileName = file.name;
           const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log(downloadUrl);
-          setDocUrl(downloadUrl);
-          console.log(docUrl);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    );
-  };
+          const createdAt = timestamp();
 
-  return { docUrl, error, progress, downloadDocument };
+          await addDocument(
+            {
+              fileName,
+              downloadUrl,
+              createdAt,
+            },
+            COLLECTION_LYRICS
+          );
+
+          setUrl(downloadUrl);
+        }
+      );
+    })();
+  }, [bucketName, file]);
+
+  return { url, progress, error };
 };
