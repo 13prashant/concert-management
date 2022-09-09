@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../configs/firebase';
 import { QUERY_LIMIT } from '../utils/constants';
 
 export const useCollection = (
   collectionName,
-  orderQuery = ['createdAt', 'desc'],
+  _orderQuery = ['createdAt', 'desc'],
   queryLimit = QUERY_LIMIT
 ) => {
+  const orderQuery = useRef(_orderQuery).current;
+
   const [documents, setDocuments] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +19,6 @@ export const useCollection = (
       try {
         setError(null);
 
-        // collection ref
         const collectionRef = collection(db, collectionName);
 
         const result = [];
@@ -42,7 +43,7 @@ export const useCollection = (
         console.error('Error: ', error.message);
       }
     })();
-  }, [collectionName, queryLimit]);
+  }, [collectionName, orderQuery, queryLimit]);
 
   return { documents, isPending, error };
 };

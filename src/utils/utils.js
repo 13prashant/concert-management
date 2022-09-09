@@ -25,7 +25,32 @@ export const createAvatarName = (string) => {
 };
 
 //Unique Id
-
 export const uniqueId = () => {
   return Math.floor(Math.random() * 100) * Date.now();
+};
+
+export const breakLyricsArrayByAlphabets = (lyricsArr) => {
+  let result = [];
+
+  let alphabeticalArr = [lyricsArr[0]];
+
+  for (let i = 1; i < lyricsArr.length; i++) {
+    let lyrics = lyricsArr[i];
+    let fileNameFirstChar = lyrics.fileName.charAt(0).toLowerCase();
+
+    let fileNameFirstCharOfLastLyricsOfAlphabeticalArr = alphabeticalArr[
+      alphabeticalArr.length - 1
+    ].fileName
+      .charAt(0)
+      .toLowerCase();
+
+    if (fileNameFirstChar !== fileNameFirstCharOfLastLyricsOfAlphabeticalArr) {
+      result.push(alphabeticalArr);
+      alphabeticalArr = [lyricsArr[i]];
+      result.push(alphabeticalArr);
+    } else {
+      alphabeticalArr.push(lyricsArr);
+    }
+  }
+  return result;
 };
