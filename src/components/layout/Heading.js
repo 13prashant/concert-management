@@ -2,11 +2,8 @@ import { useNavigate } from 'react-router-dom';
 // Material components
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
-
 // Material icons
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-// Utils
-import { createBreadCrumbTitle } from '../../utils/utils';
 
 const Heading = ({ paths }) => {
   const navigate = useNavigate();
@@ -15,12 +12,11 @@ const Heading = ({ paths }) => {
     let result = [];
 
     const lastPath = index === paths.length - 1;
-    const breadCrumbTitle = createBreadCrumbTitle(path);
 
     if (lastPath) {
       result.push(
         <Typography key={index} variant="h6" color="text.primary">
-          {breadCrumbTitle}
+          {path}
         </Typography>
       );
     } else {
@@ -37,7 +33,7 @@ const Heading = ({ paths }) => {
           }}
           onClick={() => navigate(`/${path}`)}
         >
-          {breadCrumbTitle}
+          {path}
         </Typography>
       );
     }

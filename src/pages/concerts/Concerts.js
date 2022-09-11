@@ -5,14 +5,14 @@ import Grid from '@mui/material/Grid';
 // Components
 import ConcertCard from '../../components/concerts/ConcertCard/ConcertCard';
 // Constants
-import { COLLECTION_CONCERTS } from '../../utils/constants';
+import { COLLECTION_CONCERTS, QUERY_LIMIT } from '../../utils/constants';
 
 const Concerts = () => {
   const {
     documents: concerts,
     isPending,
     error,
-  } = useCollection(COLLECTION_CONCERTS);
+  } = useCollection(COLLECTION_CONCERTS, ['time', 'desc'], QUERY_LIMIT);
 
   if (isPending) {
     return <h3>Loading...</h3>;

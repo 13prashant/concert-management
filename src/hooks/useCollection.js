@@ -1,8 +1,15 @@
-import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useRef, useState } from 'react';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../configs/firebase';
+import { QUERY_LIMIT } from '../utils/constants';
 
-export const useCollection = (collectionName) => {
+export const useCollection = (
+  collectionName,
+  _orderQuery = ['createdAt', 'desc'],
+  queryLimit = QUERY_LIMIT
+) => {
+  const orderQuery = useRef(_orderQuery).current;
+
   const [documents, setDocuments] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
@@ -10,12 +17,19 @@ export const useCollection = (collectionName) => {
   useEffect(() => {
     (async () => {
       try {
-        // collection ref
+        setError(null);
+
         const collectionRef = collection(db, collectionName);
 
         const result = [];
 
-        const querySnapshot = await getDocs(collectionRef);
+        const q = query(
+          collectionRef,
+          orderBy(...orderQuery),
+          limit(queryLimit)
+        );
+
+        const querySnapshot = await getDocs(q);
 
         querySnapshot.forEach((doc) => {
           result.push({ ...doc.data(), id: doc.id });
@@ -23,14 +37,13 @@ export const useCollection = (collectionName) => {
 
         setDocuments(result);
         setIsPending(false);
-        setError(null);
       } catch (error) {
         setIsPending(false);
         setError(error.message);
         console.error('Error: ', error.message);
       }
     })();
-  }, [collectionName]);
+  }, [collectionName, orderQuery, queryLimit]);
 
   return { documents, isPending, error };
 };

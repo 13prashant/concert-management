@@ -1,18 +1,23 @@
-import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
-import { db } from '../configs/firebase';
+import { addDoc, collection } from 'firebase/firestore';
+import { db, timestamp } from '../configs/firebase';
 
 export const useFirestore = () => {
   const [document, setDocument] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
-  // Add documents
-
-  const addDocument = async (document, collectionName) => {
-    setIsPending(true);
+  const addDocument = async (collectionName, document) => {
     try {
-      await addDoc(collection(db, collectionName), document);
+      setError(null);
+      setIsPending(true);
+
+      document.createdAt = timestamp(Date.now());
+
+      const collectionRef = collection(db, collectionName);
+
+      await addDoc(collectionRef, document);
+
       setIsPending(false);
     } catch (error) {
       setError(error.message);
