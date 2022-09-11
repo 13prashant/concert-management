@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { Button, Typography } from '@mui/material';
@@ -7,14 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useFirestore } from '../../hooks/useFirestore';
 import { COLLECTION_CONCERTS } from '../../utils/constants';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
 import { useStorage } from '../../hooks/useStorage';
-import { uniqueId } from '../../utils/utils';
 
 const CreateConcert = () => {
   //Concert form states
@@ -27,8 +20,6 @@ const CreateConcert = () => {
   const [venueError, setVenueError] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [progress, setProgress] = useState('');
-  const [urlError, setUrlError] = useState('');
 
   const { document, isPending, error, addDocument } = useFirestore();
   const { docUrl, downloadDocument } = useStorage();
@@ -72,44 +63,14 @@ const CreateConcert = () => {
       downloadDocument(metaDataType, concertPath, coverImage);
 
       if (metaDataType === 'image/jpeg') {
-        addDocument(
-          { title, venue, time, coverImage: docUrl, artists },
-          COLLECTION_CONCERTS
-        );
+        addDocument(COLLECTION_CONCERTS, {
+          title,
+          venue,
+          time,
+          coverImage: docUrl,
+          artists,
+        });
       }
-
-      // const metadata = {
-      // contentType: 'image/jpeg',
-      // };
-
-      // const storageRef = ref(
-      //   storage,
-      //   `concert-images/${coverImage.name + uniqueId()}`
-      // );
-      // const uploadTask = uploadBytesResumable(storageRef, coverImage, metadata);
-      // uploadTask.on(
-      //   'state_changed',
-      //   (snapshot) => {
-      //     const progress =
-      //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      //     setProgress(progress);
-      //   },
-      //   (error) => {
-      //     setUrlError(error.message);
-      //     console.log(error);
-      //   },
-      //   async () => {
-      //     try {
-      //       const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-      //       addDocument(
-      //         { title, venue, time, coverImage: downloadUrl, artists },
-      //         COLLECTION_CONCERTS
-      //       );
-      //     } catch (error) {
-      //       console.log(error);
-      //     }
-      //   }
-      // );
 
       //Setting changed states to its intial states
       setTitle('');

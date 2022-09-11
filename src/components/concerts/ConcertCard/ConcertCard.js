@@ -10,17 +10,17 @@ import Avatar from '@mui/material/Avatar';
 import CardActionArea from '@mui/material/CardActionArea';
 // Material colors
 import { red } from '@mui/material/colors';
-// Utils
-import { createAvatarName, createConcertSlug } from '../../../utils/utils';
+// Util Functions
+import { createAvatarName } from '../../../utils/functions/createAvatarName';
 
 const ConcertCard = ({ concert }) => {
   const navigate = useNavigate();
 
-  const { title, venue, time, coverImage, artists } = concert;
+  const { id, title, venue, time, coverImage, singers } = concert;
   return (
     <Card
       sx={{ maxWidth: 345, position: 'relative' }}
-      onClick={() => navigate(`${createConcertSlug(title)}`)}
+      onClick={() => navigate(id)}
     >
       <CardActionArea>
         <CardMedia component="img" height="140" image={coverImage} />
@@ -37,10 +37,10 @@ const ConcertCard = ({ concert }) => {
         </CardContent>
 
         <CardActions>
-          <AvatarGroup total={artists.length}>
-            {artists.map((artist) => (
-              <Avatar key={artist} sx={{ bgcolor: red[500] }}>
-                {createAvatarName(artist)}
+          <AvatarGroup total={singers.length}>
+            {singers.map((singer) => (
+              <Avatar key={singer} sx={{ bgcolor: red[500] }}>
+                {createAvatarName(singer)}
               </Avatar>
             ))}
           </AvatarGroup>

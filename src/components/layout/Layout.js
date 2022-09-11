@@ -69,7 +69,6 @@ function Layout() {
 
   const drawer = (
     <div>
-      {/* <Toolbar /> */}
       {user && (
         <>
           <Box

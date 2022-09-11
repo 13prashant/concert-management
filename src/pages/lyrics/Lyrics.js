@@ -5,8 +5,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-// Utils
-import { breakLyricsArrayByAlphabets } from '../../utils/utils';
+// Util Functions
+import { breakLyricsArrayByAlphabets } from '../../utils/functions/breakLyricsArrayByAlphabets';
 // Constants
 import { COLLECTION_LYRICS } from '../../utils/constants';
 

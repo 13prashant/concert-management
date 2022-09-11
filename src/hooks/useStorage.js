@@ -35,20 +35,17 @@ export const useStorage = (bucketName, file) => {
           const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
           const createdAt = timestamp();
 
-          await addDocument(
-            {
-              fileName,
-              downloadUrl,
-              createdAt,
-            },
-            COLLECTION_LYRICS
-          );
+          await addDocument(COLLECTION_LYRICS, {
+            fileName,
+            downloadUrl,
+            createdAt,
+          });
 
           setUrl(downloadUrl);
         }
       );
     })();
-  }, [bucketName, file]);
+  }, [bucketName, file, addDocument]);
 
   return { url, progress, error };
 };
