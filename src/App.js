@@ -25,7 +25,10 @@ function App() {
 
             <Route element={<PrivateRoutes />}>
               <Route path="/concerts" element={<Concerts />} />
-              <Route path="/concerts/:concertId" element={<Concert />} />
+              <Route
+                path="/concerts/:concertTitle/:concertId"
+                element={<Concert />}
+              />
               <Route
                 path="/concerts/create-concert"
                 element={<CreateConcert />}

@@ -11,6 +11,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 // Material colors
 import { red } from '@mui/material/colors';
 // Util Functions
+import { createConcertSlug } from '../../../utils/functions/createConcertSlugs';
 import { createAvatarName } from '../../../utils/functions/createAvatarName';
 
 const ConcertCard = ({ concert }) => {
@@ -20,7 +21,7 @@ const ConcertCard = ({ concert }) => {
   return (
     <Card
       sx={{ maxWidth: 345, position: 'relative' }}
-      onClick={() => navigate(id)}
+      onClick={() => navigate(`${createConcertSlug(title)}/${id}`)}
     >
       <CardActionArea>
         <CardMedia component="img" height="140" image={coverImage} />

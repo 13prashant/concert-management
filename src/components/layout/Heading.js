@@ -8,6 +8,12 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 const Heading = ({ paths }) => {
   const navigate = useNavigate();
 
+  const isPathConcert = paths[0] === 'concerts' && paths.length === 3;
+
+  if (isPathConcert) {
+    paths.pop();
+  }
+
   const breadcrumbs = paths.map((path, index) => {
     let result = [];
 
