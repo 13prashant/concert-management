@@ -5,7 +5,7 @@ import useDocument from '../../hooks/useDocument';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 // Components
-import ConcertDetails from '../../components/concert/ConcertDetails/ConcertDetails';
+import ConcertCover from '../../components/concert/ConcertCover/ConcertCover';
 import SongsIndex from '../../components/concert/SongsIndex/SongsIndex';
 import SingersDetails from '../../components/concert/SingersDetails/SingersDetails';
 import ArtistsDetails from '../../components/concert/ArtistsDetails/ArtistsDetails';
@@ -31,7 +31,7 @@ const Concert = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <ConcertDetails concert={concert} />
+          <ConcertCover concert={concert} />
         </Grid>
         <Grid item xs={12} lg={7}>
           <SongsIndex songs={concert.songs} />

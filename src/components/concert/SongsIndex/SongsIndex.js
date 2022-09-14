@@ -13,20 +13,39 @@ const SongsIndex = ({ songs }) => {
         Songs
       </Typography>
       <Card>
-        {songs.map(({ srNo, name, singers, pdf }) => (
-          <List key={srNo}>
-            <a href={pdf} rel="noreferrer" target="_blank">
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <Typography mr={2} component="div" variant="h5">
-                    {srNo}
-                  </Typography>
-                  <ListItemText primary={name} secondary={[...singers]} />
-                </ListItemButton>
-              </ListItem>
-            </a>
-          </List>
-        ))}
+        {songs.map(
+          ({
+            srNo,
+            name,
+            singers = [],
+            pdf,
+            scale = 'C',
+            timeSignature = '3/3',
+            tempo = '113',
+          }) => (
+            <List key={srNo}>
+              <a href={pdf} rel="noreferrer" target="_blank">
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <Typography mr={2} component="div" variant="h5">
+                      {srNo}
+                    </Typography>
+                    <ListItemText primary={name} secondary={[...singers]} />
+                    <Typography mr={2} component="div" variant="h6">
+                      {scale}
+                    </Typography>
+                    <Typography mr={2} component="div" variant="h6">
+                      {timeSignature}
+                    </Typography>
+                    <Typography mr={2} component="div" variant="h6">
+                      {tempo}
+                    </Typography>
+                  </ListItemButton>
+                </ListItem>
+              </a>
+            </List>
+          )
+        )}
       </Card>
     </>
   );
