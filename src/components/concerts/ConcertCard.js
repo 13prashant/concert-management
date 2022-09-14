@@ -11,8 +11,8 @@ import CardActionArea from '@mui/material/CardActionArea';
 // Material colors
 import { red } from '@mui/material/colors';
 // Util Functions
-import { createConcertSlug } from '../../../utils/functions/createConcertSlugs';
-import { createAvatarName } from '../../../utils/functions/createAvatarName';
+import { createConcertSlug } from '../../utils/functions/createConcertSlugs';
+import { createAvatarName } from '../../utils/functions/createAvatarName';
 
 const ConcertCard = ({ concert }) => {
   const navigate = useNavigate();

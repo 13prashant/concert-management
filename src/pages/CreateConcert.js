@@ -5,9 +5,9 @@ import { Button, Typography } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { useFirestore } from '../../hooks/useFirestore';
-import { COLLECTION_CONCERTS } from '../../utils/constants';
-import { useStorage } from '../../hooks/useStorage';
+import { useFirestore } from '../hooks/useFirestore';
+import { COLLECTION_CONCERTS } from '../utils/constants';
+import { useStorage } from '../hooks/useStorage';
 
 const CreateConcert = () => {
   //Concert form states

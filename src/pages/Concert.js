@@ -1,16 +1,16 @@
 import { useParams } from 'react-router-dom';
 // Hooks
-import useDocument from '../../hooks/useDocument';
+import useDocument from '../hooks/useDocument';
 // Material components
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 // Components
-import ConcertCover from '../../components/concert/ConcertCover/ConcertCover';
-import SongsIndex from '../../components/concert/SongsIndex/SongsIndex';
-import SingersDetails from '../../components/concert/SingersDetails/SingersDetails';
-import ArtistsDetails from '../../components/concert/ArtistsDetails/ArtistsDetails';
+import ConcertCover from '../components/concert/ConcertCover';
+import SongsIndex from '../components/concert/SongsIndex';
+import SingersDetails from '../components/concert/SingersDetails';
+import ArtistsDetails from '../components/concert/ArtistsDetails';
 // Constants
-import { COLLECTION_CONCERTS } from '../../utils/constants';
+import { COLLECTION_CONCERTS } from '../utils/constants';
 
 const Concert = () => {
   const { concertId } = useParams();

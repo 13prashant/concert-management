@@ -4,11 +4,11 @@ import { useAuthContext } from './hooks/useAuthContext';
 // Components
 import Layout from './components/layout/Layout';
 // Pages
-import Welcome from './pages/welcome/Welcome';
-import Lyrics from './pages/lyrics/Lyrics';
-import Concerts from './pages/concerts/Concerts';
-import Concert from './pages/concert/Concert';
-import CreateConcert from './pages/createConcert/CreateConcert';
+import Welcome from './pages/Welcome';
+import Lyrics from './pages/Lyrics';
+import Concerts from './pages/Concerts';
+import Concert from './pages/Concert';
+import CreateConcert from './pages/CreateConcert';
 import PrivateRoutes from './components/PrivateRoutes';
 
 function App() {

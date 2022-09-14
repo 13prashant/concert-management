@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // Contexts
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 // Hooks
-import { useLogin } from '../../hooks/useLogin';
+import { useLogin } from '../hooks/useLogin';
 // Material components
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -14,9 +14,9 @@ import Link from '@mui/material/Link';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 // Components
-import Error from '../../components/commons/Error';
+import Error from '../components/commons/Error';
 // Constants
-import { APP_NAME } from '../../utils/constants';
+import { APP_NAME } from '../utils/constants';
 
 const Welcome = () => {
   const navigate = useNavigate();

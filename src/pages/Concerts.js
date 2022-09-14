@@ -1,11 +1,11 @@
 // Hooks
-import { useCollection } from '../../hooks/useCollection';
+import { useCollection } from '../hooks/useCollection';
 // Material components
 import Grid from '@mui/material/Grid';
 // Components
-import ConcertCard from '../../components/concerts/ConcertCard/ConcertCard';
+import ConcertCard from '../components/concerts/ConcertCard';
 // Constants
-import { COLLECTION_CONCERTS, QUERY_LIMIT } from '../../utils/constants';
+import { COLLECTION_CONCERTS, QUERY_LIMIT } from '../utils/constants';
 
 const Concerts = () => {
   const {
