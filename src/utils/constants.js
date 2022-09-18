@@ -9,3 +9,6 @@ export const COLLECTION_LYRICS = 'lyrics';
 export const BUCKET_LYRICS = 'lyrics';
 
 export const QUERY_LIMIT = 20;
+
+// Admin accounts
+export const adminAccounts = ['pacific1392@gmail.com'];
