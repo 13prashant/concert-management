@@ -3,8 +3,11 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+// Material Icons
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-const ConcertCover = ({ concert }) => {
+const ConcertCover = ({ concert, totalEstimatedTime }) => {
   const { title, venue, time, coverImage } = concert;
 
   return (
@@ -33,6 +36,19 @@ const ConcertCover = ({ concert }) => {
         <Typography variant="subtitle1" color="text.secondary">
           {time.toDate().toLocaleString()}
         </Typography>
+
+        {/* <Typography variant="subtitle" position="absolute" bottom={0}>
+          Total Estimated Time:{' '} */}
+        <Chip
+          icon={<AccessTimeIcon />}
+          label={`${totalEstimatedTime.totalHours}:${totalEstimatedTime.totalMinutes}:${totalEstimatedTime.totalSeconds}`}
+          size="medium"
+          sx={{
+            position: 'absolute',
+            bottom: '0',
+          }}
+        />
+        {/* </Typography> */}
       </Box>
       <CardMedia
         component="img"
